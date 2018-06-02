@@ -1,0 +1,108 @@
+*{
+    margin:0;
+    padding:0;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+}
+.banner img{
+    height: 150px;
+    width: 100%;
+    margin: auto;
+}
+nav ul{
+    font-size: 0px;
+}
+.navMenu ul li{
+    text-align: center;
+    width: 33.3333%;
+    display: inline-block;
+    background-color: rgba(0, 200, 50, 1);
+    color: white;
+    font-size: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    box-shadow: 0px 1px 3px black;
+    min-width: 200px;
+    transition: .5s;
+}
+
+.navMenu ul li:hover{
+    background-color: rgba(0,150, 50,1);
+    transition: 1s;
+}
+
+article{
+    color: white;
+    width: 25%;
+    display: inline-block;
+    height: 100px;
+    background-color: rgba(0, 210, 90, 0.73);
+    border-radius: 20px;
+    padding: 10px;
+    border: 3px solid white;
+    box-shadow: 0px 6px 15px gray;
+    min-width: 200px;
+    margin-top: 17px;
+    margin: 13px;
+}
+article:hover{
+   transform: scale(1.1);
+   transition: transform .4s ease-in-out;
+   box-shadow: 0px 0px 20px 2px white;
+   background-color: rgba(0, 180, 80, 0.90);
+   cursor: pointer;
+}
+
+article header{
+    text-align: center;
+    font-size: 18px;
+    color: yellow;
+}
+
+article button{
+    margin-top: 7px;
+    border: 0;
+    cursor: pointer;
+    width: 100%;
+    background-color: gainsboro;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+section{
+    padding-top: 30px;
+    background-color: rgba(255, 158, 90, 0.86);
+    height: 100%;
+}
+
+.productos{
+    text-align: center;
+}
+
+.navMenu{
+    cursor: pointer;
+    text-align: center;
+}
+/* Aca el menu con su submenu */
+.navMenu li .subMenu{
+    display: none;
+    position: absolute;
+    max-width: 140px;
+}
+
+.navMenu li:hover >ul{
+    display: block; 
+}
+/* FIN DE  el menu con su submenu */
+
+.navMenu li a{
+    padding: 3px 3px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    color: white;
+}
+
+/* Aside - left panel designs*/
