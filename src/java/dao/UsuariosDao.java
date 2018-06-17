@@ -8,6 +8,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Productos;
@@ -18,20 +20,20 @@ import model.Usuario;
  * @author Soe
  */
 public class UsuariosDao implements IDao<Usuario, Integer>{
-    final String INSERT="INSERT INTO USUARIOS(nombre, precio, stock) VALUES(?,?,?)";
-    final String UPDATE="UPDATE USUARIOS SET(nombre=?, precio=?, stock=?) where id=?";
-    final String SELECT="SELECT * FROM USUARIOS";
-    final String SELECTIONE="SELECT * FROM USUARIOS WHERE id=?";
-    final String DELETE="DELETE FROM USUARIOS WHERE id=?";
-    Connection conexion=null;
+    final String INSERT="INSERT INTO CLIENTE(nombre, email, clave) VALUES(?,?,?)";
+    final String UPDATE="UPDATE CLIENTE SET(nombre=?, email=?, clave=?) where id=?";
+    final String SELECT="SELECT * FROM CLIENTE";
+    final String SELECTIONE="SELECT * FROM CLIENTE WHERE id=?";
+    final String DELETE="DELETE FROM CLIENTE WHERE id=?";
+    Connection conectate=null;
     
         public UsuariosDao(Connection connect){
-            this.conexion= conexion;
+            this.conectate= connect;
     }
-        public int Insert(Usuario usser) throws SQLException{
+        public int Insertar(Usuario usser) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(INSERT);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(INSERT);
                 stat.setString(1, usser.getNombre());
                 stat.setString(2, usser.getEmail());
                 stat.setString(3, usser.getClave());
@@ -43,13 +45,13 @@ public class UsuariosDao implements IDao<Usuario, Integer>{
             }
             
         }
-        public int Update(Usuario usser) throws SQLException{
+        public int Actualizar(Usuario usser) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(UPDATE);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(UPDATE);
                 stat.setString(1, usser.getNombre());
-                stat.setString(2, usser.getClave());
-                stat.setString(3, usser.getEmail());
+                stat.setString(2, usser.getEmail());
+                stat.setString(3, usser.getClave());
                 stat.setInt(4, usser.getId());
                 return stat.executeUpdate();
             }catch(SQLException ex){
@@ -57,22 +59,30 @@ public class UsuariosDao implements IDao<Usuario, Integer>{
                 return 0;
             }
         }
-        public ResultSet Select() {
+        public List<Usuario> Seleccionar() {
             com.mysql.jdbc.PreparedStatement stat=null;     
             try {
                 ResultSet result=stat.executeQuery();
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(SELECT);
-                return result;
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(SELECT);
+                List<Usuario> LUsuario = new ArrayList<Usuario>();
+                while(result.next()){
+                    Usuario ussu = new Usuario();
+                    ussu.setClave(result.getString("password"));
+                    ussu.setNombre(result.getString("nombre"));
+                    ussu.setEmail(result.getString("mail"));
+                    LUsuario.add(ussu);
+                }
+                return LUsuario;
             } catch (SQLException ex) {
                 Logger.getLogger(UsuariosDao.class.getName()).log(Level.SEVERE, null, ex);
                 return null;
             }
         }
-        public Usuario SelectOne(int id){
+        public Usuario SeleccionarUno(int id){
             com.mysql.jdbc.PreparedStatement stat=null;
             Usuario usser=new Usuario();
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(SELECTIONE);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(SELECTIONE);
                 stat.setInt(1, id);
                 ResultSet result=stat.executeQuery();
             }catch(SQLException ex){
@@ -80,35 +90,10 @@ public class UsuariosDao implements IDao<Usuario, Integer>{
             }
             return usser;
         }
-        public void Delete(int id) throws SQLException{
+        public void Eliminar(int id) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
-            stat=(com.mysql.jdbc.PreparedStatement) conexion.prepareStatement(DELETE);
+            stat=(com.mysql.jdbc.PreparedStatement) conectate.prepareStatement(DELETE);
             stat.setInt(1, id);
             stat.executeUpdate();
         }
-
-    @Override
-    public int Insertar(Usuario product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int Actualizar(Usuario product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Seleccionar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void SeleccionarUno(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int Eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

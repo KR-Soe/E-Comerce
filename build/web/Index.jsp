@@ -23,7 +23,7 @@
                 <li>Sobre Nosotros
                     <ul class="subMenu">
                         <li><a href="">Nuestra Empresa</a></li>
-                        <li><a href="">Contactanos</a></li>
+                        <li><a href="views/Registro.jsp">Contactanos</a></li>
                         <li><a href="">Ubicacion</a></li>
                     </ul>
                 </li>    
@@ -41,11 +41,14 @@
             <div class="productos">
                 <%for(int i=0; i<12; i++) { %>
                 <article>
-                    <header>Bebida Energetica</header>
-                    <p>Descripcion: Bebida deshidratante 750ml</p>
-                    <input type="numbre" name="cantidad">
-                    <label>$1.890</label>
-                    <button>Comprar</button>
+                    <form action="" method="POST">
+                        <header>Bebida Energetica</header>
+                        <p>Descripcion: Bebida deshidratante 750ml</p>
+                        <input placeholder="Cantidad" type="numbre" name="cantidad">
+                        <label>$1.890</label>
+
+                        <button>Comprar</button>
+                    </form>
                 </article>
                 <% } %>
             </div>

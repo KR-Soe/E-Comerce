@@ -18,7 +18,7 @@ import model.Productos;
 public class Conection {
     Productos product= new Productos();
     String host="jdbc:mysql://localhost:3306/";
-    String db="comercioBebidas";
+    String db="ventabebidas";
     String user="root";
     String clave="";
     private Connection conexion=null;

@@ -21,15 +21,15 @@ public class ProductosDao implements IDao<Productos, Integer>{
     final String SELECT="SELECT * FROM PRODUCTOS";
     final String SELECTIONE="SELECT * FROM PRODUCTOS WHERE id=?";
     final String DELETE="DELETE FROM PRODUCTOS WHERE id=?";
-    Connection conexion=null;
+    Connection conectate=null;
     
         public ProductosDao(Connection connect){
-            this.conexion= conexion;
+            this.conectate= connect;
     }
         public int Insert(Productos product) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(INSERT);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(INSERT);
                 stat.setString(1, product.getNombre());
                 stat.setInt(2, product.getPrecio());
                 stat.setInt(3, product.getStock());
@@ -43,7 +43,7 @@ public class ProductosDao implements IDao<Productos, Integer>{
         public int Update(Productos product) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(UPDATE);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(UPDATE);
                 stat.setString(1, product.getNombre());
                 stat.setInt(2, product.getPrecio());
                 stat.setInt(3, product.getStock());
@@ -58,7 +58,7 @@ public class ProductosDao implements IDao<Productos, Integer>{
             com.mysql.jdbc.PreparedStatement stat=null;     
             try {
                 ResultSet result=stat.executeQuery();
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(SELECT);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(SELECT);
                 return result;
             } catch (SQLException ex) {
                 Logger.getLogger(ProductosDao.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,7 +69,7 @@ public class ProductosDao implements IDao<Productos, Integer>{
             com.mysql.jdbc.PreparedStatement stat=null;
             Productos product= new Productos();
             try{
-                stat=(com.mysql.jdbc.PreparedStatement)conexion.prepareStatement(SELECTIONE);
+                stat=(com.mysql.jdbc.PreparedStatement)conectate.prepareStatement(SELECTIONE);
                 stat.setInt(1, id);
                 ResultSet result=stat.executeQuery();
             }catch(SQLException ex){
@@ -80,39 +80,14 @@ public class ProductosDao implements IDao<Productos, Integer>{
         public int Delete(int id) throws SQLException{
             com.mysql.jdbc.PreparedStatement stat=null;
             try{
-            stat=(com.mysql.jdbc.PreparedStatement) conexion.prepareStatement(DELETE);
+            stat=(com.mysql.jdbc.PreparedStatement) conectate.prepareStatement(DELETE);
             stat.setInt(1, id);
             return stat.executeUpdate();
             }catch(SQLException ex){
                 Logger.getLogger(ProductosDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             return 0;
-        }
-
-    @Override
-    public int Insertar(Productos product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int Actualizar(Productos product) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Seleccionar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    @Override
-    public void SeleccionarUno(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public int Eliminar(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-        
+        }  
 }
 
 

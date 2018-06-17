@@ -1,0 +1,21 @@
+SMAP
+recibirProductos_jsp.java
+JSP
+*S JSP
+*F
++ 0 recibirProductos.jsp
+Controller/recibirProductos.jsp
+*L
+5,19:48
+23,11:67
+34,2:78,3
+36:84
+37:85,3
+38:88
+39:89,3
+40:92
+41:93,3
+42,2:96
+44:98,3
+45,5:101
+*E
